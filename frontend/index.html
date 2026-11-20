@@ -1,0 +1,465 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RailEase | Train Reservation</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+<div class="app-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">
+                <i data-lucide="train-front"></i>
+            </div>
+            <span>Rail<span class="brand-blue">Ease</span></span>
+        </div>
+
+        <p class="menu-label">MENU</p>
+
+        <nav class="navigation">
+            <a href="#" class="nav-link active" data-page="dashboard">
+                <i data-lucide="layout-dashboard"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="#" class="nav-link" data-page="search">
+                <i data-lucide="search"></i>
+                <span>Search Trains</span>
+            </a>
+
+            <a href="#" class="nav-link" data-page="bookings">
+                <i data-lucide="ticket"></i>
+                <span>My Bookings</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="help-card">
+                <div class="help-icon">
+                    <i data-lucide="headset"></i>
+                </div>
+                <h4>Need help?</h4>
+                <p>We're here to help with your journey.</p>
+                <button onclick="alert('Contact support at support@railease.com')">
+                    Get Support
+                </button>
+            </div>
+
+            <div class="profile">
+                <div class="avatar">K</div>
+                <div class="profile-info">
+                    <strong>Krishna</strong>
+                    <span>Traveller</span>
+                </div>
+                <i data-lucide="more-horizontal"></i>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+            <div>
+                <h2 id="page-title">Dashboard</h2>
+                <p id="page-subtitle">Your journey starts here.</p>
+            </div>
+
+            <div class="topbar-right">
+                <div class="date-display">
+                    <i data-lucide="calendar-days"></i>
+                    <span id="today-date"></span>
+                </div>
+                <div class="notification">
+                    <i data-lucide="bell"></i>
+                    <span></span>
+                </div>
+                <div class="avatar">K</div>
+            </div>
+        </header>
+
+        <!-- DASHBOARD PAGE -->
+        <section class="page active" id="dashboard">
+
+            <div class="welcome-banner">
+                <div class="welcome-content">
+                    <span class="welcome-tag">YOUR NEXT ADVENTURE AWAITS</span>
+                    <h1>Where would you<br>like to go today?</h1>
+                    <p>Discover destinations and book your next train journey with ease.</p>
+                    <button class="primary-button" onclick="showPage('search')">
+                        Book a Train <i data-lucide="arrow-right"></i>
+                    </button>
+                </div>
+                <div class="banner-decoration">
+                    <i data-lucide="train-front"></i>
+                    <div class="circle circle-one"></div>
+                    <div class="circle circle-two"></div>
+                </div>
+            </div>
+
+            <!-- STATS -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon purple">
+                        <i data-lucide="ticket"></i>
+                    </div>
+                    <div>
+                        <span>Total Bookings</span>
+                        <h2 id="total-bookings">0</h2>
+                        <small>Your reservations</small>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i data-lucide="check-circle"></i>
+                    </div>
+                    <div>
+                        <span>Confirmed Tickets</span>
+                        <h2 id="confirmed-bookings">0</h2>
+                        <small>Successfully booked</small>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon orange">
+                        <i data-lucide="train-front"></i>
+                    </div>
+                    <div>
+                        <span>Available Trains</span>
+                        <h2>06</h2>
+                        <small>Sample train services</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUICK SEARCH -->
+            <div class="section-heading">
+                <div>
+                    <h2>Find your train</h2>
+                    <p>Search for trains between your favourite destinations.</p>
+                </div>
+            </div>
+
+            <div class="search-card">
+                <form id="quick-search-form">
+                    <div class="search-fields">
+
+                        <div class="field">
+                            <label>FROM</label>
+                            <div class="input-wrapper">
+                                <i data-lucide="map-pin"></i>
+                                <input type="text" id="quick-from" placeholder="Departure city" required>
+                            </div>
+                        </div>
+
+                        <div class="swap-icon">
+                            <i data-lucide="arrow-left-right"></i>
+                        </div>
+
+                        <div class="field">
+                            <label>TO</label>
+                            <div class="input-wrapper">
+                                <i data-lucide="map-pin"></i>
+                                <input type="text" id="quick-to" placeholder="Destination city" required>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label>JOURNEY DATE</label>
+                            <div class="input-wrapper">
+                                <i data-lucide="calendar"></i>
+                                <input type="date" id="quick-date" required>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="search-button">
+                        <i data-lucide="search"></i> Search Trains
+                    </button>
+                </form>
+            </div>
+
+            <!-- POPULAR ROUTES -->
+            <div class="section-heading">
+                <div>
+                    <h2>Popular destinations</h2>
+                    <p>Explore some of the most travelled routes.</p>
+                </div>
+            </div>
+
+            <div class="destinations-grid">
+                <div class="destination-card">
+                    <div class="destination-image city-hyderabad">
+                        <span>POPULAR</span>
+                    </div>
+                    <div class="destination-info">
+                        <h3>Hyderabad</h3>
+                        <p>From Bengaluru</p>
+                        <button onclick="selectRoute('Bengaluru','Hyderabad')">Explore route →</button>
+                    </div>
+                </div>
+
+                <div class="destination-card">
+                    <div class="destination-image city-chennai"></div>
+                    <div class="destination-info">
+                        <h3>Chennai</h3>
+                        <p>From Bengaluru</p>
+                        <button onclick="selectRoute('Bengaluru','Chennai')">Explore route →</button>
+                    </div>
+                </div>
+
+                <div class="destination-card">
+                    <div class="destination-image city-mumbai"></div>
+                    <div class="destination-info">
+                        <h3>Mumbai</h3>
+                        <p>From Bengaluru</p>
+                        <button onclick="selectRoute('Bengaluru','Mumbai')">Explore route →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RECENT BOOKINGS -->
+            <div class="section-heading">
+                <div>
+                    <h2>Recent bookings</h2>
+                    <p>Your latest train reservations.</p>
+                </div>
+                <button class="text-button" onclick="showPage('bookings')">View all →</button>
+            </div>
+
+            <div id="recent-bookings" class="recent-bookings">
+                <div class="empty-state">
+                    <i data-lucide="ticket"></i>
+                    <h3>No bookings yet</h3>
+                    <p>Your booked tickets will appear here.</p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- SEARCH PAGE -->
+        <section class="page" id="search">
+
+            <div class="page-intro">
+                <h1>Find your perfect train</h1>
+                <p>Enter your journey details and explore available trains.</p>
+            </div>
+
+            <div class="search-card">
+                <form id="train-search-form">
+                    <div class="search-fields">
+
+                        <div class="field">
+                            <label>FROM</label>
+                            <div class="input-wrapper">
+                                <i data-lucide="map-pin"></i>
+                                <input type="text" id="search-from" placeholder="Departure city" required>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label>TO</label>
+                            <div class="input-wrapper">
+                                <i data-lucide="map-pin"></i>
+                                <input type="text" id="search-to" placeholder="Destination city" required>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label>JOURNEY DATE</label>
+                            <div class="input-wrapper">
+                                <i data-lucide="calendar"></i>
+                                <input type="date" id="search-date" required>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label>TRAVEL CLASS</label>
+                            <div class="input-wrapper">
+                                <i data-lucide="armchair"></i>
+                                <select id="search-class">
+                                    <option value="Sleeper">Sleeper</option>
+                                    <option value="3AC">AC 3 Tier</option>
+                                    <option value="2AC">AC 2 Tier</option>
+                                    <option value="1AC">AC First Class</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="search-button">
+                        <i data-lucide="search"></i> Find Trains
+                    </button>
+                </form>
+            </div>
+
+            <div class="results-heading">
+                <div>
+                    <h2>Available trains</h2>
+                    <p id="results-description">Select your route to view trains.</p>
+                </div>
+                <span class="results-count" id="results-count">0 Trains</span>
+            </div>
+
+            <div id="train-results">
+                <div class="empty-state">
+                    <i data-lucide="train-front"></i>
+                    <h3>Ready for your journey?</h3>
+                    <p>Search for a route to discover available trains.</p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- BOOKINGS PAGE -->
+        <section class="page" id="bookings">
+
+            <div class="page-intro">
+                <h1>My Bookings</h1>
+                <p>All your train journeys in one place.</p>
+            </div>
+
+            <div class="booking-summary">
+                <div>
+                    <span>Total Tickets</span>
+                    <h2 id="booking-total">0</h2>
+                </div>
+                <i data-lucide="ticket-check"></i>
+            </div>
+
+            <div id="all-bookings">
+                <div class="empty-state">
+                    <i data-lucide="ticket"></i>
+                    <h3>No bookings found</h3>
+                    <p>Book your first train journey to see it here.</p>
+                    <button class="primary-button" onclick="showPage('search')">Search Trains</button>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+</div>
+
+<!-- BOOKING MODAL -->
+<div class="modal-overlay" id="booking-modal">
+    <div class="modal">
+        <div class="modal-header">
+            <div>
+                <h2>Complete your booking</h2>
+                <p>Enter passenger information below.</p>
+            </div>
+            <button class="close-button" onclick="closeModal()">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+
+        <div id="selected-train-info"></div>
+
+        <form id="passenger-form">
+
+            <h3>Passenger details</h3>
+
+            <div id="passenger-fields">
+                <div class="passenger-input-group">
+                    <div class="form-field">
+                        <label>Full Name</label>
+                        <input type="text" name="name" placeholder="Enter passenger name" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label>Age</label>
+                            <input type="number" name="age" min="1" max="120" placeholder="Age" required>
+                        </div>
+
+                        <div class="form-field">
+                            <label>Gender</label>
+                            <select name="gender" required>
+                                <option value="">Select</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="add-passenger" onclick="addPassengerField()">
+                + Add another passenger
+            </button>
+
+            <div class="seat-selection">
+                <h3>Select your seat</h3>
+                <p>Choose an available seat.</p>
+                <div id="seat-grid" class="seat-grid"></div>
+                <div class="seat-legend">
+                    <span><i class="legend-available"></i> Available</span>
+                    <span><i class="legend-selected"></i> Selected</span>
+                    <span><i class="legend-booked"></i> Booked</span>
+                </div>
+            </div>
+
+            <div class="price-summary">
+                <span>Total Amount</span>
+                <h2 id="total-price">₹0</h2>
+            </div>
+
+            <button type="submit" class="search-button full-button">
+                Confirm Booking <i data-lucide="arrow-right"></i>
+            </button>
+
+        </form>
+    </div>
+</div>
+
+<!-- TICKET MODAL -->
+<div class="modal-overlay" id="ticket-modal">
+    <div class="modal ticket-modal">
+        <button class="close-button ticket-close" onclick="closeTicket()">
+            <i data-lucide="x"></i>
+        </button>
+
+        <div class="success-icon">
+            <i data-lucide="check"></i>
+        </div>
+
+        <h2>Booking Confirmed!</h2>
+        <p class="success-message">Your journey is booked successfully.</p>
+
+        <div id="ticket-details"></div>
+
+        <button class="search-button full-button" onclick="window.print()">
+            <i data-lucide="printer"></i> Print Ticket
+        </button>
+
+        <button class="text-button center-button" onclick="closeTicket()">Close</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+    lucide.createIcons();
+</script>
+
+</body>
+</html>
